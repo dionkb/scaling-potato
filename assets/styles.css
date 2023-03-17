@@ -26,7 +26,7 @@ h1 {
 main {
     width: 100%;
     position: relative;
-    top: 200px;
+    top: 250px;
     text-align: center;
 }   
 
@@ -34,4 +34,5 @@ button {
     font-size: 40px;
     background-color: var(--primary);
     color: var(--secondary);
+    margin-top: 250px;
 }
