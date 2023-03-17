@@ -1,8 +1,18 @@
 let startButton = document.querySelector("button");
 
-// Added this prompt function to test addEventListener on button
 function startQuiz() {
-    alert("TEST!");
-};
+    let timer = 5;
+    function timeRemaining() {
+        timer--;
+        if (timer > 0){
+        document.getElementById("countdownTimer").innerHTML = " " + timer;
+        setTimeout(timeRemaining, 1000);
+        }
+        else {
+            document.getElementById("countdownTimer").innerHTML = " 0";
+        }
+    }
+    timeRemaining();
+}
 
 startButton.addEventListener("click", startQuiz);
