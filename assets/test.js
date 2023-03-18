@@ -23,26 +23,6 @@ let questionBank = [
         correctAnswer: "0"
     },
     {
-        question: "What is CSS used for?",
-        answers: [
-            "a: To securely transfer data",
-            "b: To build the structure of a webpage",
-            "c: To style a webpage",
-            "d: To add logic to a webpage", 
-        ],
-        correctAnswer: "2"
-    },
-    {
-        question: "What is Javascript used for?",
-        answers: [
-            "a: To add logic to a webpage",
-            "b: To securely transfer data",
-            "c: To build the structure of a webpage",
-            "d: To style a webpage",
-        ],
-        correctAnswer: "0"
-    },
-    {
         question: "What is Bootstrap?",
         answers: [
             "a: Opens the current directory in VSCode",
@@ -51,6 +31,86 @@ let questionBank = [
             "d: git touch [your file name]",
         ],
         correctAnswer: "2"
+    },
+    {
+        question: "What is an @media query used for?",
+        answers: [
+            "a: Opens the current directory in VSCode",
+            "b: A method",
+            "c: To apply CSS depending on the media type (screen size, print vs. screen, etc.)",
+            "d: Lists the items in the current directory",
+        ],
+        correctAnswer: "2"
+    },
+    {
+        question: "What is an example of a string?",
+        answers: [
+            "a: Opens the current directory in VSCode",
+            "b: JavaScript Object Notation",
+            "c: A CSS framework for developing mobile-first websites",
+            "d: 'abcd'",
+        ],
+        correctAnswer: "3"
+    },
+    {
+        question: "Inline, block, and flex are examples of what property?",
+        answers: [
+            "a: Display",
+            "b: Right-click -> Inspect",
+            "c: JSON.strigify([myarray])",
+            "d: align-items:",
+        ],
+        correctAnswer: "0"
+    },
+    {
+        question: "Who has two thumbs and is mediocre at coding?",
+        answers: [
+            "a: Opens the current directory in VSCode",
+            "b: 👍 This guy 👍",
+            "c: It converts a JSON stringified object to a JavaScript object",
+            "d: It rounds a number down to the nearest whole number",
+        ],
+        correctAnswer: "1"
+    },
+    {
+        question: "What does 'ls' do in the GitBash terminal?",
+        answers: [ 
+            "a: The development of both Front and Back End software",
+            "b: git touch [your file name]",
+            "c: To add logic to a webpage",
+            "d: Lists the items in the current directory",
+        ],
+        correctAnswer: "3"
+    },
+    {
+        question: "What does JSON.parse do?",
+        answers: [
+            "a: It converts a JSON stringified object to a JavaScript object",
+            "b: JavaScript Object Notation",
+            "c: To build the structure of a webpage",
+            "d: git touch [your file name]",
+        ],
+        correctAnswer: "0"
+    },
+    {
+        question: "What is CSS used for?",
+        answers: [
+            "a: 'abcd'",
+            "b: To style a webpage",
+            "c: Opens the current directory in VSCode",
+            "d: Application Programming Interface",
+        ],
+        correctAnswer: "1"
+    },
+    {
+        question: "What does math.floor do in JavaScript?",
+        answers: [
+            "a: JSON.strigify([myarray])",
+            "b: It rounds a number down to the nearest whole number",
+            "c: Right-click -> Inspect",
+            "d: align-items:",
+        ],
+        correctAnswer: "1"
     }
 ];
 
