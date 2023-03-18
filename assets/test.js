@@ -1,7 +1,7 @@
 // Variables declared for global use
 // Variables to allow for eventListeners and textContent replacements on questions and answers
 let renderQuestion = document.querySelector(".questions");
-let answerButtons = document.querySelector(".answer")
+let answerButtons = document.querySelector(".answers")
 let renderAnswer1 = document.querySelector("#answer1");
 let renderAnswer2 = document.querySelector("#answer2");
 let renderAnswer3 = document.querySelector("#answer3");
@@ -14,44 +14,44 @@ let currentQ = 0;
 let questionBank = [
     {
         question: "What is HTML used for?",
-        answers: {
-            a: "To build the structure of a webpage",
-            b: "To style a webpage",
-            c: "To add logic to a webpage",
-            d: "To securely transfer data",
-        },
-        correctAnswer: 'a'
+        answers: [
+            "a: To build the structure of a webpage",
+            "b: To style a webpage",
+            "c: To add logic to a webpage",
+            "d: To securely transfer data",
+        ],
+        correctAnswer: "0"
     },
     {
         question: "What is CSS used for?",
-        answers: {
-            a: "To securely transfer data",
-            b: "To build the structure of a webpage",
-            c: "To style a webpage",
-            d: "To add logic to a webpage", 
-        },
-        correctAnswer: 'c'
+        answers: [
+            "a: To securely transfer data",
+            "b: To build the structure of a webpage",
+            "c: To style a webpage",
+            "d: To add logic to a webpage", 
+        ],
+        correctAnswer: "2"
     },
     {
         question: "What is Javascript used for?",
-        answers: {
-            a: "To add logic to a webpage",
-            b: "To securely transfer data",
-            c: "To build the structure of a webpage",
-            d: "To style a webpage",
-        },
-        correctAnswer: 'a'
+        answers: [
+            "a: To add logic to a webpage",
+            "b: To securely transfer data",
+            "c: To build the structure of a webpage",
+            "d: To style a webpage",
+        ],
+        correctAnswer: "0"
     },
     {
         question: "What is Bootstrap?",
-        answers: {
-            a: "Opens the current directory in VSCode",
-            b: "JavaScript Object Notation",
-            c: "A CSS framework for developing mobile-first websites",
-            d: "git touch [your file name]",
-        },
-        correctAnswer: 'c'
-    },
+        answers: [
+            "a: Opens the current directory in VSCode",
+            "b: JavaScript Object Notation",
+            "c: A CSS framework for developing mobile-first websites",
+            "d: git touch [your file name]",
+        ],
+        correctAnswer: "2"
+    }
 ];
 
 // Variables to be used for timer
@@ -68,7 +68,7 @@ function baseTimer() {
     let timerChanges = setInterval(function () {
         timeRemaining--;
         timerDisplay.textContent = timeRemaining;
-        if (currentQ === 10 || timeRemaining === 0 ) {
+        if (currentQ === 10 || timeRemaining <= 0 ) {
             clearInterval(timerChanges);
             renderQuestion.textContent = "FINISHED!";
             renderAnswer1.display = "hidden";
@@ -79,17 +79,6 @@ function baseTimer() {
     }, 1000);
 }
 
-// This section generates questions and answers while the quiz is running.
-function displayQuestions(currentQ) {
-    if (currentQ < questionBank.length) {
-        renderQuestion.textContent = questionBank[currentQ].question;   
-        renderAnswer1.textContent = questionBank[currentQ].answers.a;
-        renderAnswer2.textContent = questionBank[currentQ].answers.b;
-        renderAnswer3.textContent = questionBank[currentQ].answers.c;
-        renderAnswer4.textContent = questionBank[currentQ].answers.d;
-    }
-}
-
 // Function runs upon clicking startButton
 function startQuiz() {
     questionsRemaining = 10;
@@ -97,41 +86,34 @@ function startQuiz() {
     displayQuestions(currentQ);
 }
 
-    // // Allows a question from the questionBank to be pulled
-    // function generateQuestion() {
-    //     for (currentQ; currentQ < questionBank.length;) {
-    //     let question = questionBank[currentQ].question;
-    //     return question;
-    //     }   
-    // }
+// This section generates questions and answers while the quiz is running.
+function displayQuestions(currentQ) {
+    if (currentQ < questionBank.length) {
+        renderQuestion.textContent = questionBank[currentQ].question;   
+        renderAnswer1.textContent = questionBank[currentQ].answers[0];
+        renderAnswer2.textContent = questionBank[currentQ].answers[1];
+        renderAnswer3.textContent = questionBank[currentQ].answers[2];
+        renderAnswer4.textContent = questionBank[currentQ].answers[3];
+    }
+}
 
-    // function generateAnswer() {
-    //     for (currentQ; currentQ < questionBank.length;) {
-    //     let answer = questionBank[currentQ].answers;
-    //     return answer;
-    //     }   
-    // }
+function rightOrWrong(event) {
+    event.preventDefault();
+    if (questionBank[currentQ].correctAnswer === event.target.value) {
+        timeRemaining = timeRemaining + 2;
+    } else if (questionBank[currentQ].correctAnswer !== event.target.value) {
+        timeRemaining = timeRemaining -5;
+    }
 
-    // // Adds event listeners so each answer can be clicked to go to next question
-    // renderAnswer1.addEventListener("click", displayQuestions);
-    // renderAnswer2.addEventListener("click", displayQuestions);
-    // renderAnswer3.addEventListener("click", displayQuestions);
-    // renderAnswer4.addEventListener("click", displayQuestions);
+    if (currentQ < questionBank.length) {
+        currentQ++;
+    }
 
-    // function checkCorrect(event) {
-    //     event.preventDefault();
-    //     if (questionBank[currentQ].correctAnswer === event.target.value) {
-    //         timer = timer + 5;
-    //     } else if (questionBank[currentQ].correctAnswer !== event.target.value) {
-    //         timer = timer - 10;
-    //     }
-        
-    //     if (currentQ < questionBank.length) {
-    //         currentQ++;
-    //     }
-    // }
+    displayQuestions(currentQ);
+}
 
-    // answerButtons.addEventListener('click', checkCorrect);
+    // Adds event listener so each answer can be clicked to check if right or wrong
+    answerButtons.addEventListener("click", rightOrWrong);
 
 // Allows user to click the startButton, triggering the startQuiz function
 startButton.addEventListener("click", startQuiz);

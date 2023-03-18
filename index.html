@@ -14,10 +14,10 @@
     <main>
         <section class="questions">Are you ready?</section>
         <div class="answers">
-            <button class="answer" id="answer1">???</button>
-            <button class="answer" id="answer2">???</button>
-            <button class="answer" id="answer3">???</button>
-            <button class="answer" id="answer4">???</button>
+            <button class="answer" id="answer1" value="0">???</button>
+            <button class="answer" id="answer2" value="1">???</button>
+            <button class="answer" id="answer3" value="2">???</button>
+            <button class="answer" id="answer4" value="3">???</button>
         </div>
         <button class ="startBtn">START!</button>
         <h2>TIME LEFT: <span id=countdownTimer>30</span></h2>
@@ -45,8 +45,8 @@ THEN a timer starts and I am presented with a question
 
 WHEN I answer a question
 THEN I am presented with another question
-    COMPLETE! Allow each answer to be clickable
-    COMPLETE! Right or wrong, answering will remove that question and open a new one
+    REDO! Allow each answer to be clickable
+    REDO! Right or wrong, answering will remove that question and open a new one
 
 ASIDE: Can't do the next question without linking correct and incorrect answers.
 
