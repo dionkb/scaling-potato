@@ -14,7 +14,7 @@ let questionBank = [
     "What is Javascript used for?",
     "What is an @media query used for?",
     "What is an example of a string?",
-    "Inline, block, and flex are examples of what property?",
+    
     "What is Full Stack development?",
     "A function inside of an object is called a(n)?",
     "How do you open ChromeDevTools?",
