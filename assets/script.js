@@ -1,10 +1,10 @@
 // Variables declared for global use
 let renderQuestion = document.querySelector(".questions");
-let renderAnswer1 = document.querySelector(".answer1");
-let renderAnswer2 = document.querySelector(".answer2");
-let renderAnswer3 = document.querySelector(".answer3");
-let renderAnswer4 = document.querySelector(".answer4");
-const startButton = document.querySelector("button");
+let renderAnswer1 = document.querySelector("#answer1");
+let renderAnswer2 = document.querySelector("#answer2");
+let renderAnswer3 = document.querySelector("#answer3");
+let renderAnswer4 = document.querySelector("#answer4");
+const startButton = document.querySelector(".startBtn");
 const questionBank = [
     "What is HTML used for?",
     "what is CSS used for?",
@@ -57,7 +57,7 @@ console.log(questionBank);
 function startQuiz() {
 
     // Sets up the timer, and decrements it each second.
-    let timer = 5;
+    let timer = 30;
     function timeRemaining() {
         timer--;
         if (timer > 0){
@@ -71,29 +71,42 @@ function startQuiz() {
     // Calls the function so it will run
     timeRemaining();
 
-    // Allows a random question from the questionBank to be pulled
-    function generateQuestion() {
-        let question = questionBank[Math.floor(Math.random() * questionBank.length)];
-        return question;
-    } 
-    // Calls the function so it will run
-    generateQuestion();
+    // This section generates questions and answers while the quiz is running.
+    function quizTime() {
+        
+        // Allows a random question from the questionBank to be pulled
+        function generateQuestion() {
+            let question = questionBank[Math.floor(Math.random() * questionBank.length)];
+            return question;
+        } 
+        // Calls the function so it will run
+        generateQuestion();
 
-    // Allows a random answer from the answerBank to be pulled
-    function generateAnswer() {
-        let answer = answerBank[Math.floor(Math.random() * answerBank.length)];
-        return answer;
-    }
+        // Allows a random answer from the answerBank to be pulled
+        function generateAnswer() {
+            let answer = answerBank[Math.floor(Math.random() * answerBank.length)];
+            return answer;
+        }
     
-    // Calls the function so it will run
-    generateAnswer();
+        // Calls the function so it will run
+        generateAnswer();
 
-    // Renders the randomly generated question and answers to the screen    
-    renderQuestion.textContent = generateQuestion();
-    renderAnswer1.textContent = generateAnswer();
-    renderAnswer2.textContent = generateAnswer();
-    renderAnswer3.textContent = generateAnswer();
-    renderAnswer4.textContent = generateAnswer();
+        // Renders the randomly generated question and answers to the screen    
+        renderQuestion.textContent = generateQuestion();
+        renderAnswer1.textContent = generateAnswer();
+        renderAnswer2.textContent = generateAnswer();
+        renderAnswer3.textContent = generateAnswer();
+        renderAnswer4.textContent = generateAnswer();
+        renderAnswer1.addEventListener("click", nextQuestion);
+        renderAnswer2.addEventListener("click", nextQuestion);
+        renderAnswer3.addEventListener("click", nextQuestion);
+        renderAnswer4.addEventListener("click", nextQuestion);
+    }
+    quizTime();
+
+    function nextQuestion() {
+            quizTime();
+    }
 }
 
 // Allows user to click the startButton, triggering the startQuiz function

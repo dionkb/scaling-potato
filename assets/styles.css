@@ -24,19 +24,35 @@ h1 {
 }
 
 main {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     position: relative;
-    top: 50px;
+    top: 30px;
     text-align: center;
+    justify-content: center;
 }  
 
 .questions {
     margin-bottom: 150px;
 }
 
-button {
+.startBtn {
     font-size: 40px;
     background-color: var(--primary);
     color: var(--secondary);
-    margin-top: 250px;
+    margin-top: 150px;
+}
+
+.answers{
+    display: flex;
+    flex-direction: column;
+}
+
+button.answer { 
+    background: none; 
+    border: 1px solid var(--primary);
+    margin: 10px;
+    justify-content: center;
+    text-align: center;
 }
