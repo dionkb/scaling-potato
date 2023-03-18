@@ -68,7 +68,7 @@ function baseTimer() {
     let timerChanges = setInterval(function () {
         timeRemaining--;
         timerDisplay.textContent = timeRemaining;
-        if (questionsRemaining === 0 || timeRemaining === 0 ) {
+        if (currentQ === 10 || timeRemaining === 0 ) {
             clearInterval(timerChanges);
             renderQuestion.textContent = "FINISHED!";
             renderAnswer1.display = "hidden";
@@ -79,62 +79,59 @@ function baseTimer() {
     }, 1000);
 }
 
+// This section generates questions and answers while the quiz is running.
+function displayQuestions(currentQ) {
+    if (currentQ < questionBank.length) {
+        renderQuestion.textContent = questionBank[currentQ].question;   
+        renderAnswer1.textContent = questionBank[currentQ].answers.a;
+        renderAnswer2.textContent = questionBank[currentQ].answers.b;
+        renderAnswer3.textContent = questionBank[currentQ].answers.c;
+        renderAnswer4.textContent = questionBank[currentQ].answers.d;
+    }
+}
+
 // Function runs upon clicking startButton
 function startQuiz() {
     questionsRemaining = 10;
     baseTimer();
-    displayQuestions();
+    displayQuestions(currentQ);
 }
 
-    // This section generates questions and answers while the quiz is running.
-    function displayQuestions() {
+    // // Allows a question from the questionBank to be pulled
+    // function generateQuestion() {
+    //     for (currentQ; currentQ < questionBank.length;) {
+    //     let question = questionBank[currentQ].question;
+    //     return question;
+    //     }   
+    // }
 
-        // Allows a question from the questionBank to be pulled
-        function generateQuestion() {
-            for (currentQ; currentQ < questionBank.length;) {
-            let question = questionBank[currentQ].question;
-            return question;
-            }   
-        }
+    // function generateAnswer() {
+    //     for (currentQ; currentQ < questionBank.length;) {
+    //     let answer = questionBank[currentQ].answers;
+    //     return answer;
+    //     }   
+    // }
 
-        // Renders the generated question to the screen
-        renderQuestion.textContent = generateQuestion();
+    // // Adds event listeners so each answer can be clicked to go to next question
+    // renderAnswer1.addEventListener("click", displayQuestions);
+    // renderAnswer2.addEventListener("click", displayQuestions);
+    // renderAnswer3.addEventListener("click", displayQuestions);
+    // renderAnswer4.addEventListener("click", displayQuestions);
 
-        function generateAnswer() {
-            for (currentQ; currentQ < questionBank.length;) {
-            let answer = questionBank[currentQ].answers;
-            return answer;
-            }   
-        }
-
-        // Renders the generated answers to the screen    
-        renderAnswer1.textContent = generateAnswer().a;
-        renderAnswer2.textContent = generateAnswer().b;
-        renderAnswer3.textContent = generateAnswer().c;
-        renderAnswer4.textContent = generateAnswer().d;
-
-        // Adds event listeners so each answer can be clicked to go to next question
-        renderAnswer1.addEventListener("click", displayQuestions);
-        renderAnswer2.addEventListener("click", displayQuestions);
-        renderAnswer3.addEventListener("click", displayQuestions);
-        renderAnswer4.addEventListener("click", displayQuestions);
-
-        function checkCorrect(event) {
-            event.preventDefault();
-            if (questionBank[currentQ].correctAnswer === event.target.value) {
-                timer = timer + 5;
-            } else if (questionBank[currentQ].correctAnswer !== event.target.value) {
-                timer = timer - 10;
-            }
+    // function checkCorrect(event) {
+    //     event.preventDefault();
+    //     if (questionBank[currentQ].correctAnswer === event.target.value) {
+    //         timer = timer + 5;
+    //     } else if (questionBank[currentQ].correctAnswer !== event.target.value) {
+    //         timer = timer - 10;
+    //     }
         
-            if (currentQ < questionBank.length) {
-                currentQ++;
-            }
-        }
+    //     if (currentQ < questionBank.length) {
+    //         currentQ++;
+    //     }
+    // }
 
-        answerButtons.addEventListener('click', checkCorrect);
-    }
-    displayQuestions(currentQ);
+    // answerButtons.addEventListener('click', checkCorrect);
 
 // Allows user to click the startButton, triggering the startQuiz function
 startButton.addEventListener("click", startQuiz);
