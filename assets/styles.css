@@ -23,6 +23,14 @@ h1 {
     font-size: 44px;
 }
 
+h2 {
+    margin: 0;
+}
+
+h3 {
+    margin: 0;
+}
+
 main {
     display: flex;
     flex-direction: column;
@@ -41,7 +49,7 @@ main {
     font-size: 40px;
     background-color: var(--primary);
     color: var(--secondary);
-    margin-top: 150px;
+    margin: 150px 0 15px 0;
 }
 
 .answers{

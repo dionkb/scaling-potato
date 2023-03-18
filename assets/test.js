@@ -1,14 +1,16 @@
 // Variables declared for global use
-// Variables to allow for eventListeners and textContent replacements
+// Variables to allow for eventListeners and textContent replacements on questions and answers
 let renderQuestion = document.querySelector(".questions");
+let answerButtons = document.querySelector(".answer")
 let renderAnswer1 = document.querySelector("#answer1");
 let renderAnswer2 = document.querySelector("#answer2");
 let renderAnswer3 = document.querySelector("#answer3");
 let renderAnswer4 = document.querySelector("#answer4");
 let startButton = document.querySelector(".startBtn");
-let currentQ = -1;
+let questionsRemaining = document.querySelector("#questionsRemaining");
+let currentQ = 0;
 
-// Variables for question/answer banks and used question/answer banks
+// Objects for question/answer bank
 let questionBank = [
     {
         question: "What is HTML used for?",
@@ -23,22 +25,22 @@ let questionBank = [
     {
         question: "What is CSS used for?",
         answers: {
-            a: "To build the structure of a webpage",
-            b: "To style a webpage",
-            c: "To add logic to a webpage",
-            d: "To securely transfer data",
+            a: "To securely transfer data",
+            b: "To build the structure of a webpage",
+            c: "To style a webpage",
+            d: "To add logic to a webpage", 
         },
-        correctAnswer: 'b'
+        correctAnswer: 'c'
     },
     {
         question: "What is Javascript used for?",
         answers: {
-            a: "To build the structure of a webpage",
-            b: "To style a webpage",
-            c: "To add logic to a webpage",
-            d: "To securely transfer data",
+            a: "To add logic to a webpage",
+            b: "To securely transfer data",
+            c: "To build the structure of a webpage",
+            d: "To style a webpage",
         },
-        correctAnswer: 'c'
+        correctAnswer: 'a'
     },
     {
         question: "What is Bootstrap?",
@@ -47,20 +49,24 @@ let questionBank = [
             b: "JavaScript Object Notation",
             c: "A CSS framework for developing mobile-first websites",
             d: "git touch [your file name]",
-        }
+        },
+        correctAnswer: 'c'
     },
 ];
+
+// Variables to be used for timer
+let timerDisplay = document.querySelector("#countdownTimer");
+let timeRemaining = 30;
 
 // Function runs upon clicking startButton
 function startQuiz() {
 
     // Sets up the timer, and decrements it each second.
-    let timer = 30;
-    function timeRemaining() {
-        timer--;
-        if (timer > 0){
-        document.getElementById("countdownTimer").innerHTML = " " + timer;
-        setTimeout(timeRemaining, 1000);
+    function timer() {
+        timeRemaining--;
+        if (timeRemaining > 0){
+        document.getElementById("countdownTimer").innerHTML = " " + timeRemaining;
+        setTimeout(timer, 1000);
         }
         else {
             document.getElementById("countdownTimer").innerHTML = " 0";
@@ -74,7 +80,6 @@ function startQuiz() {
 
         // Allows a question from the questionBank to be pulled
         function generateQuestion() {
-            currentQ++;
             for (currentQ; currentQ < questionBank.length;) {
             let question = questionBank[currentQ].question;
             return question;
@@ -103,14 +108,24 @@ function startQuiz() {
         renderAnswer3.addEventListener("click", displayQuestions);
         renderAnswer4.addEventListener("click", displayQuestions);
 
+        function checkCorrect(event) {
+            event.preventDefault();
+            if (questionBank[currentQ].correctAnswer === event.target.value) {
+                timer = timer + 5;
+            } else if (questionBank[currentQ].correctAnswer !== event.target.value) {
+                timer = timer - 10;
+            }
+        
+            if (currentQ < questionBank.length) {
+                currentQ++;
+            }
+        }
+
+        answerButtons.addEventListener('click', checkCorrect);
     }
-
-    // Calls the function so it will run
-    displayQuestions();
+    displayQuestions(currentQ);
 }
-
-
-
 
 // Allows user to click the startButton, triggering the startQuiz function
 startButton.addEventListener("click", startQuiz);
+

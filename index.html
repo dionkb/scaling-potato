@@ -12,15 +12,16 @@
         <h1>SUPER CODE QUIZ II: TURBO HD REMIX</h1>
     </nav>
     <main>
-        <section class="questions">Question</section>
+        <section class="questions">Are you ready?</section>
         <div class="answers">
-            <button class="answer" id="answer1">Answer 1</button>
-            <button class="answer" id="answer2">Answer 2</button>
-            <button class="answer" id="answer3">Answer 3</button>
-            <button class="answer" id="answer4">Answer 4</button>
+            <button class="answer" id="answer1">???</button>
+            <button class="answer" id="answer2">???</button>
+            <button class="answer" id="answer3">???</button>
+            <button class="answer" id="answer4">???</button>
         </div>
         <button class ="startBtn">START!</button>
         <h2>TIME LEFT: <span id=countdownTimer>30</span></h2>
+        <h3>Questions Remaining: <span id="questionsRemaining">10</span></h3>
     </main>
     <script src="./assets/test.js"></script>
 </body>
@@ -46,6 +47,8 @@ WHEN I answer a question
 THEN I am presented with another question
     COMPLETE! Allow each answer to be clickable
     COMPLETE! Right or wrong, answering will remove that question and open a new one
+
+ASIDE: Can't do the next question without linking correct and incorrect answers.
 
 WHEN I answer a question incorrectly
 THEN time is subtracted from the clock
