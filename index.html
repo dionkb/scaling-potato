@@ -39,24 +39,24 @@ THEN a timer starts and I am presented with a question
     COMPLETE! Add a timer to the page (use some sort of decrement)
     COMPLETE! Link the timer to the click
     COMPLETE! Have a question rendered to the page dynamically
-        ADD MORE LATER: Create a question bank object which contains answers and correct answer key
+        COMPLETE! Create a question bank object which contains answers and correct answer key
     COMPLETE! Have answer choices rendered to the page
-        ADD MORE LATER
+        COMPLETE!
 
 WHEN I answer a question
 THEN I am presented with another question
-    REDO! Allow each answer to be clickable
-    REDO! Right or wrong, answering will remove that question and open a new one
+    COMPLETE! Allow each answer to be clickable
+    COMPLETE! Right or wrong, answering will remove that question and open a new one
 
-ASIDE: Can't do the next question without linking correct and incorrect answers.
+COMPLETE! Can't do the next question without linking correct and incorrect answers.
 
 WHEN I answer a question incorrectly
 THEN time is subtracted from the clock
-    9. When choice !== answer, decrement clock further
+    COMPLETE! When choice !== answer, decrement clock further
 
 WHEN all questions are answered or the timer reaches 0
 THEN the game is over
-    10. When questionsremaining = 0 || time = 0, game over
+    COMPLETE! When questionsremaining = 0 || time = 0, game over
 
 WHEN the game is over
 THEN I can save my initials and my score 
@@ -65,7 +65,7 @@ THEN I can save my initials and my score
     13. Final scoreboard must receive name input
 
 NEW ISSUES:
-    1. Clicking START again will mess up the timer.
+    COMPLETE! Clicking START again will mess up the timer.
     2. Questions will likely repeat throughout quiz.
         Possibly add a usedQuestions array to push used q's to?
     3. Answers can repeat for the same question

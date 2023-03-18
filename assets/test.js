@@ -128,7 +128,7 @@ function baseTimer() {
     let timerChanges = setInterval(function () {
         timeRemaining--;
         timerDisplay.textContent = timeRemaining;
-        if (currentQ === 10 || timeRemaining <= 0 ) {
+        if (currentQ === questionBank.length || timeRemaining <= 0 ) {
             clearInterval(timerChanges);
             renderQuestion.textContent = "FINISHED!";
             renderAnswer1.display = "hidden";
@@ -144,6 +144,7 @@ function startQuiz() {
     questionsRemaining = 10;
     baseTimer();
     displayQuestions(currentQ);
+    startButton.setAttribute("disabled", "");
 }
 
 // This section generates questions and answers while the quiz is running.
