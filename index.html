@@ -13,12 +13,14 @@
     </nav>
     <main>
         <section class="questions">Question</section>
-        <section class="answer1">Answer 1</section>
-        <section class="answer2">Answer 2</section>
-        <section class="answer3">Answer 3</section>
-        <section class="answer4">Answer 4</section>
-        <button>START!</button>
-        <h2>TIME LEFT:<span id=countdownTimer></span></h2>
+        <div class="answers">
+            <button class="answer" id="answer1">Answer 1</button>
+            <button class="answer" id="answer2">Answer 2</button>
+            <button class="answer" id="answer3">Answer 3</button>
+            <button class="answer" id="answer4">Answer 4</button>
+        </div>
+        <button class ="startBtn">START!</button>
+        <h2>TIME LEFT: <span id=countdownTimer>30</span></h2>
     </main>
     <script src="./assets/script.js"></script>
 </body>
@@ -44,8 +46,8 @@ THEN a timer starts and I am presented with a question
 
 WHEN I answer a question
 THEN I am presented with another question
-    7. Allow each answer to be clickable
-    8. Right or wrong, answering will remove that question and open a new one
+    COMPLETE! Allow each answer to be clickable
+    COMPLETE! Right or wrong, answering will remove that question and open a new one
 
 WHEN I answer a question incorrectly
 THEN time is subtracted from the clock
@@ -66,4 +68,6 @@ NEW ISSUES:
     2. Questions will likely repeat throughout quiz.
         Possibly add a usedQuestions array to push used q's to?
     3. Answers can repeat for the same question
+    4. How to make sure the correct answer always appears in answer choices?
+    5. Answer buttons are too long and wont center if made smaller
 -->
