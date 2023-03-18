@@ -58,22 +58,33 @@ let questionBank = [
 let timerDisplay = document.querySelector("#countdownTimer");
 let timeRemaining = 30;
 
+// --------------------- END OF GLOBAL VARIABLES -------------------------------------//
+
+
+// --------------------- START OF QUIZ FUNCTIONS ------------------------------------//
+
+// Basic timer function using setInterval to allow for penalties later
+function baseTimer() {
+    let timerChanges = setInterval(function () {
+        timeRemaining--;
+        timerDisplay.textContent = timeRemaining;
+        if (questionsRemaining === 0 || timeRemaining === 0 ) {
+            clearInterval(timerChanges);
+            renderQuestion.textContent = "FINISHED!";
+            renderAnswer1.display = "hidden";
+            renderAnswer2.display = "hidden";
+            renderAnswer3.display = "hidden";
+            renderAnswer4.display = "hidden";
+        }
+    }, 1000);
+}
+
 // Function runs upon clicking startButton
 function startQuiz() {
-
-    // Sets up the timer, and decrements it each second.
-    function timer() {
-        timeRemaining--;
-        if (timeRemaining > 0){
-        document.getElementById("countdownTimer").innerHTML = " " + timeRemaining;
-        setTimeout(timer, 1000);
-        }
-        else {
-            document.getElementById("countdownTimer").innerHTML = " 0";
-        }
-    }
-    // Calls the function so it will run
-    timeRemaining();
+    questionsRemaining = 10;
+    baseTimer();
+    displayQuestions();
+}
 
     // This section generates questions and answers while the quiz is running.
     function displayQuestions() {
@@ -124,7 +135,6 @@ function startQuiz() {
         answerButtons.addEventListener('click', checkCorrect);
     }
     displayQuestions(currentQ);
-}
 
 // Allows user to click the startButton, triggering the startQuiz function
 startButton.addEventListener("click", startQuiz);
