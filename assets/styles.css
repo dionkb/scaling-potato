@@ -26,9 +26,13 @@ h1 {
 main {
     width: 100%;
     position: relative;
-    top: 250px;
+    top: 50px;
     text-align: center;
-}   
+}  
+
+.questions {
+    margin-bottom: 150px;
+}
 
 button {
     font-size: 40px;

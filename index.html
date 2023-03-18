@@ -12,7 +12,11 @@
         <h1>SUPER CODE QUIZ II: TURBO HD REMIX</h1>
     </nav>
     <main>
-        <section class="questions">HAHGHASDHGS</section>
+        <section class="questions">Question</section>
+        <section class="answer1">Answer 1</section>
+        <section class="answer2">Answer 2</section>
+        <section class="answer3">Answer 3</section>
+        <section class="answer4">Answer 4</section>
         <button>START!</button>
         <h2>TIME LEFT:<span id=countdownTimer></span></h2>
     </main>
@@ -33,8 +37,10 @@ THEN a timer starts and I am presented with a question
     COMPLETE! Link the timer to the click
     COMPLETE! Have a question rendered to the page dynamically
         COMPLETE! Create a question bank
-        COMPLETE! Make a random order to render them
-    6. Have answer choices rendered to the page
+        COMPLETE! Make a random order to render them one at a time
+    COMPLETE! Have answer choices rendered to the page
+        COMPLETE! Create an answer bank
+        COMPLETE! Make a random order to render them four at a time
 
 WHEN I answer a question
 THEN I am presented with another question
@@ -57,4 +63,7 @@ THEN I can save my initials and my score
 
 NEW ISSUES:
     1. Clicking START again will mess up the timer.
+    2. Questions will likely repeat throughout quiz.
+        Possibly add a usedQuestions array to push used q's to?
+    3. Answers can repeat for the same question
 -->
