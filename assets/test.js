@@ -120,6 +120,9 @@ let currentQ = 0;
 
 // Variables used for score submission section
 let submitScore = document.querySelector(".submitBtn");
+document.querySelector(".submitBtn").disabled = true;
+let viewScore = document.querySelector(".viewScores");
+
 
 // --------------------- END OF GLOBAL VARIABLES -------------------------------------//
 
@@ -128,28 +131,27 @@ let submitScore = document.querySelector(".submitBtn");
 
 // Basic timer function using setInterval to allow for penalties later
 function baseTimer() {
-    document.querySelector(".submitBtn").disabled = true;
     let timerChanges = setInterval(function () {
         timeRemaining--;
         timerDisplay.textContent = "TIME LEFT: " + timeRemaining;
         if (currentQ === questionBank.length || timeRemaining <= 0 ) {
             clearInterval(timerChanges);
             renderQuestion.textContent = "Submit Score!";
-            timerDisplay.textContent = ("Score: " + timeRemaining)
-            function saveScore() {
-                localStorage.setItem("Score", timeRemaining);
-            }
+            timerDisplay.textContent = ("Score: " + timeRemaining);
             saveScore();
             document.querySelector(".submitBtn").disabled = false;
+            document.querySelector(".startBtn").disabled = false;
         }
     }, 1000);
 }
 
 // Function runs upon clicking startButton
 function startQuiz() {
+    timeRemaining = 30;
+    currentQ = 0;
     baseTimer();
     displayQuestions(currentQ);
-    startButton.setAttribute("disabled", "");
+    document.querySelector(".startBtn").disabled = true;
 }
 
 // This section generates questions and answers while the quiz is running.
@@ -179,8 +181,34 @@ function rightOrWrong(event) {
     displayQuestions(currentQ);
 }
 
-    // Adds event listener so each answer can be clicked to check if right or wrong
-    answerButtons.addEventListener("click", rightOrWrong);
+function saveScore() {
+    localStorage.setItem("Score", timeRemaining);
+}
+
+function saveInitials(initials) {
+    localStorage.setItem("Initials", initials);
+}
+
+function storeScores(event) { 
+    event.preventDefault();
+    var initials = document.querySelector(".enterInitials").value;
+    saveInitials(initials); 
+}
+
+function loadScores() {
+    var saveScore = localStorage.getItem("Score");
+    var saveInitials = localStorage.getItem("Initials");
+    renderQuestion.innerHTML = saveInitials + ":  " + saveScore;
+}
+
+//
+submitScore.addEventListener("click", storeScores);
+
+//
+viewScore.addEventListener("click", loadScores);
+
+// Adds event listener so each answer can be clicked to check if right or wrong
+answerButtons.addEventListener("click", rightOrWrong);
 
 // Allows user to click the startButton, triggering the startQuiz function
 startButton.addEventListener("click", startQuiz);
