@@ -3,6 +3,10 @@
     --secondary: rgb(28, 200, 200);
 }
 
+* {
+    font-size: 28px;
+}
+
 body {
     min-height: 100vh;
     max-width: 100vw;
