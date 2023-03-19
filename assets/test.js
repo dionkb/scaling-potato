@@ -8,7 +8,8 @@ let renderAnswer3 = document.querySelector("#answer3");
 let renderAnswer4 = document.querySelector("#answer4");
 let startButton = document.querySelector(".startBtn");
 
-// Objects for question/answer bank
+// Objects for question/answer bank along with key for correct answer to match with
+// selected answers id# from html
 let questionBank = [
     {
         question: "What is HTML used for?",
@@ -124,17 +125,21 @@ let submitScore = document.querySelector(".submitBtn");
 document.querySelector(".submitBtn").disabled = true;
 let viewScore = document.querySelector(".viewScores");
 
-
 // --------------------- END OF GLOBAL VARIABLES -------------------------------------//
+
+
 
 
 // --------------------- START OF QUIZ FUNCTIONS ------------------------------------//
 
-// Basic timer function using setInterval to allow for penalties later
+// Basic timer function using setInterval to allow for penalties later. Timer decrements
+// by approx 1 per sec.
 function baseTimer() {
     let timerChanges = setInterval(function () {
         timeRemaining--;
         timerDisplay.textContent = "TIME LEFT: " + timeRemaining;
+        //Checks if time = 0 or if questions are all answered, and ends game.
+        // Also takes time remaining and uses that as score. Allows user to submit score.
         if (currentQ === questionBank.length || timeRemaining <= 0 ) {
             clearInterval(timerChanges);
             renderQuestion.textContent = "Submit Score!";
@@ -146,7 +151,8 @@ function baseTimer() {
     }, 1000);
 }
 
-// Function runs upon clicking startButton
+// Function runs upon clicking startButton. Resets time and question status.
+// Starts timer and loads first question. Disables start button until quiz finishes.
 function startQuiz() {
     timeRemaining = 30;
     currentQ = 0;
@@ -166,6 +172,8 @@ function displayQuestions(currentQ) {
     }
 }
 
+// This takes the chosen answer id# and compares it to the key for the correct answer.
+// If right, award time (points), if wrong, penalize.
 function rightOrWrong(event) {
     event.preventDefault();
     questionsRemaining.textContent = Math.abs(currentQ-9);
@@ -174,14 +182,16 @@ function rightOrWrong(event) {
     } else if (questionBank[currentQ].correctAnswer !== event.target.value) {
         timeRemaining = timeRemaining -5;
     }
-
+    // Increment current question count after answering each question
     if (currentQ < questionBank.length) {
         currentQ++;
     }
-
+    // Restarts display question function to show new q/a based on incremented currentQ
     displayQuestions(currentQ);
 }
 
+// Allows user to enter initials and submit score (based on time remaining). The score
+// is then compared with other attempts from local storage, and sorted from best to worst.
 function storeScores(event) { 
     event.preventDefault();
     var initials = document.querySelector(".enterInitials").value;
@@ -197,24 +207,27 @@ function storeScores(event) {
     saveScore(); 
 }
 
+// Takes the array of initials/scores and makes them an object to store locally.
 function saveScore() {
     localStorage.setItem("highScores", JSON.stringify(topScores));
 }
 
+// Pulls from localStorage, converts back to array.
 function loadScores() {
     var leaderboard = JSON.parse(localStorage.getItem("highScores"));
-    // var lead = Object.values(leaderboard);
+    // Ensures the localStorage won't be overwritten by a null topScores array upon refresh
     if (leaderboard !== null) {
         topScores = leaderboard;
         console.log(leaderboard);
     };
+    // Displays the Highest Scorer based on previously sorted array 
     renderQuestion.textContent = "High Score: " + leaderboard[0].name + ": " + leaderboard[0].yourScore;
 }
 
-//
+// Allows submit button to be clicked to start storeScores function when quiz is done.
 submitScore.addEventListener("click", storeScores);
 
-//
+// Allows view score button to be clicked to start loadScores function to show score to beat.
 viewScore.addEventListener("click", loadScores);
 
 // Adds event listener so each answer can be clicked to check if right or wrong
