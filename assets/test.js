@@ -119,6 +119,7 @@ let questionsLeft = document.querySelector("#questionsRemaining");
 let currentQ = 0;
 
 // Variables used for score submission section
+let topScores = [];
 let submitScore = document.querySelector(".submitBtn");
 document.querySelector(".submitBtn").disabled = true;
 let viewScore = document.querySelector(".viewScores");
@@ -181,24 +182,33 @@ function rightOrWrong(event) {
     displayQuestions(currentQ);
 }
 
-function saveScore() {
-    localStorage.setItem("Score", timeRemaining);
-}
-
-function saveInitials(initials) {
-    localStorage.setItem("Initials", initials);
-}
-
 function storeScores(event) { 
     event.preventDefault();
     var initials = document.querySelector(".enterInitials").value;
-    saveInitials(initials); 
+    var score = timeRemaining;
+    topScores.push({name: initials, yourScore: score});
+    topScores = topScores.sort((a, b) => {
+        if (a.score < b.score) {
+            return 1;
+        } else {
+            return -1;
+        }
+        });
+    saveScore(); 
+}
+
+function saveScore() {
+    localStorage.setItem("highScores", JSON.stringify(topScores));
 }
 
 function loadScores() {
-    var saveScore = localStorage.getItem("Score");
-    var saveInitials = localStorage.getItem("Initials");
-    renderQuestion.innerHTML = saveInitials + ":  " + saveScore;
+    var leaderboard = JSON.parse(localStorage.getItem("highScores"));
+    // var lead = Object.values(leaderboard);
+    if (leaderboard !== null) {
+        topScores = leaderboard;
+        console.log(leaderboard);
+    };
+    renderQuestion.textContent = "High Score: " + leaderboard[0].name + ": " + leaderboard[0].yourScore;
 }
 
 //

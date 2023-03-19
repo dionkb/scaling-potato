@@ -42,7 +42,9 @@ main {
 }  
 
 .questions {
-    margin-bottom: 150px;
+    height: 100px;
+    margin-bottom: 50px;
+    display: block;
 }
 
 .startBtn {
