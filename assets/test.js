@@ -7,8 +7,6 @@ let renderAnswer2 = document.querySelector("#answer2");
 let renderAnswer3 = document.querySelector("#answer3");
 let renderAnswer4 = document.querySelector("#answer4");
 let startButton = document.querySelector(".startBtn");
-let questionsRemaining = document.querySelector("#questionsRemaining");
-let currentQ = 0;
 
 // Objects for question/answer bank
 let questionBank = [
@@ -114,9 +112,14 @@ let questionBank = [
     }
 ];
 
-// Variables to be used for timer
+// Variables to be used for timer/questions left
 let timerDisplay = document.querySelector("#countdownTimer");
 let timeRemaining = 30;
+let questionsLeft = document.querySelector("#questionsRemaining");
+let currentQ = 0;
+
+// Variables used for score submission section
+let submitScore = document.querySelector(".submitBtn");
 
 // --------------------- END OF GLOBAL VARIABLES -------------------------------------//
 
@@ -125,23 +128,25 @@ let timeRemaining = 30;
 
 // Basic timer function using setInterval to allow for penalties later
 function baseTimer() {
+    document.querySelector(".submitBtn").disabled = true;
     let timerChanges = setInterval(function () {
         timeRemaining--;
-        timerDisplay.textContent = timeRemaining;
+        timerDisplay.textContent = "TIME LEFT: " + timeRemaining;
         if (currentQ === questionBank.length || timeRemaining <= 0 ) {
             clearInterval(timerChanges);
-            renderQuestion.textContent = "FINISHED!";
-            renderAnswer1.display = "hidden";
-            renderAnswer2.display = "hidden";
-            renderAnswer3.display = "hidden";
-            renderAnswer4.display = "hidden";
+            renderQuestion.textContent = "Submit Score!";
+            timerDisplay.textContent = ("Score: " + timeRemaining)
+            function saveScore() {
+                localStorage.setItem("Score", timeRemaining);
+            }
+            saveScore();
+            document.querySelector(".submitBtn").disabled = false;
         }
     }, 1000);
 }
 
 // Function runs upon clicking startButton
 function startQuiz() {
-    questionsRemaining = 10;
     baseTimer();
     displayQuestions(currentQ);
     startButton.setAttribute("disabled", "");
@@ -160,6 +165,7 @@ function displayQuestions(currentQ) {
 
 function rightOrWrong(event) {
     event.preventDefault();
+    questionsRemaining.textContent = Math.abs(currentQ-9);
     if (questionBank[currentQ].correctAnswer === event.target.value) {
         timeRemaining = timeRemaining + 2;
     } else if (questionBank[currentQ].correctAnswer !== event.target.value) {

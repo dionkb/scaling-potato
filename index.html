@@ -20,8 +20,12 @@
             <button class="answer" id="answer4" value="3">???</button>
         </div>
         <button class ="startBtn">START!</button>
-        <h2>TIME LEFT: <span id=countdownTimer>30</span></h2>
-        <h3>Questions Remaining: <span id="questionsRemaining">10</span></h3>
+        <h2 id=countdownTimer>TIME LEFT: 30</h2>
+        <h3>Questions Remaining: <span id="questionsRemaining"></span></h3>
+        <div class="scoreContainer">
+            <input class="enterInitials" placeholder="Enter initials here"></input>
+            <button class="submitBtn">SUBMIT</button>
+        </div>
     </main>
     <script src="./assets/test.js"></script>
 </body>
@@ -60,15 +64,15 @@ THEN the game is over
 
 WHEN the game is over
 THEN I can save my initials and my score 
-    11. Score will have to be logged to local memory
+    COMPLETE! Score will have to be logged to local memory
+        ASIDE: Needs input area for initials
     12. Scoreboard will have to render the tops upon entering
     13. Final scoreboard must receive name input
 
 NEW ISSUES:
     COMPLETE! Clicking START again will mess up the timer.
-    2. Questions will likely repeat throughout quiz.
-        Possibly add a usedQuestions array to push used q's to?
-    3. Answers can repeat for the same question
-    4. How to make sure the correct answer always appears in answer choices?
+    COMPLETE! Questions will likely repeat throughout quiz.
+    COMPLETE! Answers can repeat for the same question
+    COMPLETE! How to make sure the correct answer always appears in answer choices?
     5. Answer buttons are too long and wont center if made smaller
 -->
